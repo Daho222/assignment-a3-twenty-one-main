@@ -22,75 +22,78 @@ export class Player {
 
   /**
    * Initializes a new instance of the Deck class.
+   *
+   * @param nickname
+   * @param standValue
+   * @param hand
    */
   constructor (nickname, standValue = 14, hand) {
     this.#nickname = nickname
     this.#standValue = standValue
     this.#hand = []
-    
   }
 
   /**
    * Returns canHut.
-   * 
+   *
    */
   get canHit () {
-
     if (this.#standValue < 22) {
-      return "canhit ja"
+      return 'canhit ja'
     } else {
       return false
     }
-    
   }
+
   /**
- * Returns isBusted.
- * 
- */
+   * Returns isBusted.
+   *
+   */
   get isBusted () {
     if (this.#standValue > 21) {
-      return "canhit nej"
+      return 'canhit nej'
     } else {
       return false
     }
   }
+
   /**
    * Returns isNaturalWinner.
-   * 
+   *
    */
   get isNaturelWinner () {
     if (this.#standValue = 21) {
-      return "winner"
+      return 'winner'
     } else {
       return false
     }
   }
+
   /**
    * Returns nickname.
-   * 
+   *
    */
   get nickname () {
     return this.#nickname
   }
-  
+
   /**
    * Adds cards to players hand
-   * 
-   * 
+   *
+   * @param playingCard
    */
   addToHand (playingCard) {
     this.#hand.push(playingCard)
-    console.log("the hand: " + this.#hand[0])
+    console.log('the hand: ' + this.#hand[0])
   }
 
   /**
    * Discards hand.
-   * 
+   *
    */
   discardHand () {
     return this.#hand
   }
-
 
   /**
    * Returns a string representing the object.
@@ -98,7 +101,7 @@ export class Player {
    * @returns {string} A string that represents the current object.
    */
   toString () {
-    return /*this.#hand.join(' ')*/
+    /* this.#hand.join(' ') */
   }
 
   /**

@@ -32,9 +32,10 @@ export class Deck {
       }
     }
   }
+
   /**
    * Returns the number of cards in deck.
-   * 
+   *
    */
   get count () {
     return this.#playingCards.length
@@ -49,25 +50,24 @@ export class Deck {
       ;[this.#playingCards[i], this.#playingCards[randomIndex]] = [this.#playingCards[randomIndex], this.#playingCards[i]]
     }
   }
+
   /**
    * Adds a card to bottom of deck.
-   * 
-   * 
+   *
+   * @param playingCards
    */
   add (playingCards) {
     this.#playingCards.unshift(playingCards)
-
   }
 
   /**
    * Deals a card from top of deck.
-   * 
+   *
    * @returns {PlayingCard} Top card of the deck.
    */
   deal () {
     return this.#playingCards.pop()
   }
-
 
   /**
    * Returns a string representing the object.
