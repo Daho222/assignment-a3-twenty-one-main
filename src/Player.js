@@ -21,13 +21,13 @@ export class Player {
   #standValue
 
   /**
-   * Initializes a new instance of the Deck class.
+   * Initializes a new instance of the Player class.
    *
    * @param nickname
    * @param standValue
    * @param hand
    */
-  constructor (nickname, standValue = 14, hand) {
+  constructor (nickname, standValue = 19) {
     this.#nickname = nickname
     this.#standValue = standValue
     this.#hand = []
@@ -38,10 +38,17 @@ export class Player {
    *
    */
   get canHit () {
-    if (this.#standValue < 22) {
-      return 'canhit ja'
-    } else {
-      return false
+    for (let i = 0; i < 5; i++) {
+        
+      let value = this.valueOf()      
+      console.log("Points: " + value) 
+      if (value < 21) {
+          console.log("canhit shows true")
+          return true
+        } else {
+          console.log("canhit shows false")
+          return false
+        }     
     }
   }
 
@@ -50,8 +57,8 @@ export class Player {
    *
    */
   get isBusted () {
-    if (this.#standValue > 21) {
-      return 'canhit nej'
+    if (this.valueOf() > 21) {
+      return true
     } else {
       return false
     }
@@ -62,8 +69,8 @@ export class Player {
    *
    */
   get isNaturelWinner () {
-    if (this.#standValue = 21) {
-      return 'winner'
+    if (this.valueOf() === 21) {
+      return true
     } else {
       return false
     }
@@ -84,7 +91,7 @@ export class Player {
    */
   addToHand (playingCard) {
     this.#hand.push(playingCard)
-    console.log('the hand: ' + this.#hand[0])
+    console.log('Player got: ' + this.#hand[this.#hand.length-1])
   }
 
   /**
@@ -110,6 +117,9 @@ export class Player {
    * @returns {number} The primitive value of the specified object.
    */
   valueOf () {
-    return this.#standValue
+    let value = this.#hand.reduce(function (a, b) {
+      return a + b;
+    }, 0);
+    return value
   }
 }
