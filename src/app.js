@@ -19,23 +19,36 @@ try {
   startValueArray.shift()
   startValueArray.shift()
   console.log(startValueArray)
-
-  if (startValueArray.length < 1) {
-    numberOfPlayers = 2
-    numberOfRounds = 1
-  } else if (startValueArray.length === 1) {
-    numberOfRounds = 1
-    numberOfPlayers = startValueArray[0]
-  } else if (startValueArray.length === 2) {
-    if (startValueArray[0] > 5) {
-      throw Error('Only maximum 5 rounds can be played. Enter number of rounds again, 1-5.')
-    } else {
-      numberOfRounds = startValueArray[0]
-      numberOfPlayers = startValueArray[1]
+  
+  if (startValueArray.length < 1) 
+    {
+      numberOfPlayers = 3
+      numberOfRounds = 1
+    } else if (startValueArray.length === 1) {
+      if ((Number(startValueArray[0]) !== startValueArray[0] && startValueArray[0] % 1 !== 0 || startValueArray[0] % 1 < 1)) {
+        throw Error("Inputs must be Integers")
+      } else {
+        numberOfRounds = startValueArray[0]
+        numberOfPlayers = 3
+      }
+      
+    } else if (startValueArray.length === 2) {
+      if ((Number(startValueArray[0]) !== startValueArray[0] && startValueArray[0] % 1 !== 0) || startValueArray[0] % 1 < 1 || 
+        (Number(startValueArray[1]) !== startValueArray[1] && startValueArray[1] % 1 !== 0) || startValueArray[1] % 1 < 1) {
+          throw Error("Inputs must be Integers")
+        } else {
+          if (startValueArray[0] > 5 && startValueArray[0] < 1) {
+            throw Error('Enter number of rounds again, 1-5.')
+          } else {
+            numberOfRounds = startValueArray[0]
+            numberOfPlayers = startValueArray[1]
+          }
+        }
+      
+    } else if (startValueArray.length > 2) {
+      throw Error('Enter only up to two parameters!')
     }
-  } else if (startValueArray.length > 2) {
-    throw Error('Enter only up to two parameters!')
-  }
+ 
   console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
   
   console.log('Number Of Rounds: ' + numberOfRounds)
