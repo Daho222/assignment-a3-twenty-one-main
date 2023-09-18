@@ -27,30 +27,27 @@ export class Player {
    * @param standValue
    * @param hand
    */
-  constructor (nickname, standValue = 19) {
+  constructor (nickname, standValue = 14) {
     this.#nickname = nickname
     this.#standValue = standValue
     this.#hand = []
   }
 
   /**
-   * Returns canHut.
+   * Returns canHit.
    *
    */
   get canHit () {
-    for (let i = 0; i < 5; i++) {
-        
-      let value = this.valueOf()      
-      console.log("Points: " + value) 
-      if (value < 21) {
-          console.log("canhit shows true")
+      if (this.#hand.length === 5) {
+        console.log("Five Cards")
+        return false
+      } else if (this.valueOf() < 15) {
           return true
         } else {
-          console.log("canhit shows false")
           return false
         }     
     }
-  }
+  //}
 
   /**
    * Returns isBusted.
@@ -91,7 +88,6 @@ export class Player {
    */
   addToHand (playingCard) {
     this.#hand.push(playingCard)
-    console.log('Player got: ' + this.#hand[this.#hand.length-1])
   }
 
   /**
@@ -99,7 +95,7 @@ export class Player {
    *
    */
   discardHand () {
-    return this.#hand
+    return this.#hand = []
   }
 
   /**
@@ -108,7 +104,7 @@ export class Player {
    * @returns {string} A string that represents the current object.
    */
   toString () {
-    /* this.#hand.join(' ') */
+    return this.#hand.join(' ')
   }
 
   /**
@@ -117,6 +113,7 @@ export class Player {
    * @returns {number} The primitive value of the specified object.
    */
   valueOf () {
+    
     let value = this.#hand.reduce(function (a, b) {
       return a + b;
     }, 0);
