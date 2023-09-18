@@ -92,17 +92,13 @@ try {
 
 
 
-  for(rounds = 0; rounds < numberOfRounds + 1; rounds++) {
-  
+  for(rounds = 1; rounds < numberOfRounds + 1; rounds++) {
+    console.log('\n', `------ Round # ${rounds} ----------`, '\n')
+
     for(i = 1; i < numberOfPlayers + 1; i++) {
       let player = new Player(("Player#" + i), 14)
       players.push(player.nickname)
-
-
     
-      console.log('\n', `------ Round # ${rounds + 1} ----------`, '\n')
-
-      rounds += 1  
       player.discardHand()
       hit = 1
       if (player.valueOf() < 22) {
