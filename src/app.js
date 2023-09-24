@@ -11,6 +11,7 @@
 
 import { Deck } from './Deck.js'
 import { Player } from './Player.js'
+import { PlayingCard } from './PlayingCard.js'
 
 try {
   const startValueArray = process.argv
@@ -109,7 +110,7 @@ try {
           player.addToHand(deltCard)
           console.log("Deck count: " + deck.count + "  Delt Card:  " + deltCard.toString(), '\n')
           console.log(player.nickname + ": " + player.toString())
-
+          console.log(player.valueOf())
           
           if (player.isNaturelWinner) {
             console.log("21! Player Wins!")
