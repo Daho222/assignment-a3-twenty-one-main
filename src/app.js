@@ -11,64 +11,88 @@
 
 import { Deck } from './Deck.js'
 import { Player } from './Player.js'
-import { PlayingCard } from './PlayingCard.js'
+import { CardTable } from './CardTable.js'
 
 try {
+
   const startValueArray = process.argv
   let numberOfPlayers = 0
   let numberOfRounds = 0
   startValueArray.shift()
   startValueArray.shift()
-  console.log(startValueArray)
+  const startValueObject = {
+    "numberOfRounds": 0,
+    "numberOfPlayers": 0
+  }
+  //console.log(cardTable.playRounds(startValueArray[0]))  
   
-  if (startValueArray.length < 1) 
-    {
-      numberOfPlayers = 3
-      numberOfRounds = 1
-    } else if (startValueArray.length === 1) {
-      if ((Number(startValueArray[0]) !== startValueArray[0] && startValueArray[0] % 1 !== 0 || startValueArray[0] % 1 < 1)) {
-        throw Error("Inputs must be Integers")
+  
+  if (startValueArray.length < 1) {
+    numberOfPlayers = 3
+    numberOfRounds = 1
+    startValueObject.numberOfRounds = 1
+    startValueObject.numberOfPlayers = 3
+    console.log(startValueObject)
+    
+
+  } else if (startValueArray.length === 1) {
+    if ((isFinite(startValueArray[0]) === false && startValueArray[0] % 1 !== 0 && startValueArray[0] % 1 < 1)) {
+      throw Error("Inputs must be Integers")
+    } else {
+      startValueObject.numberOfRounds = startValueArray[0]
+      startValueObject.numberOfPlayers = 3
+      console.log(startValueObject)     
+    }
+    
+  } else if (startValueArray.length === 2) {
+    if ((Number(startValueArray[0]) !== startValueArray[0] && startValueArray[0] % 1 !== 0) || 
+      (Number(startValueArray[1]) !== startValueArray[1] && startValueArray[1] % 1 !== 0)) {
+        throw Error("Inputs must be Integerss")
       } else {
-        numberOfRounds = startValueArray[0]
-        numberOfPlayers = 3
-      }
-      
-    } else if (startValueArray.length === 2) {
-      if ((Number(startValueArray[0]) !== startValueArray[0] && startValueArray[0] % 1 !== 0) || 
-        (Number(startValueArray[1]) !== startValueArray[1] && startValueArray[1] % 1 !== 0)) {
-          throw Error("Inputs must be Integers")
-        } else {
-          if (startValueArray[0] > 5 && startValueArray[0] < 1) {
-            throw Error('Enter number of rounds again, 1-5.')
-          } else if (startValueArray[0] % 1 === 0) {
-            numberOfRounds = parseInt(startValueArray[0])
-            if (startValueArray[1] % 1 === 0) {
-              numberOfPlayers = parseInt(startValueArray[1])
-            } else {
-              numberOfRounds = startValueArray[0]
-              numberOfPlayers = startValueArray[1]
-            }
+        if (startValueArray[0] > 5 && startValueArray[0] < 1) {
+          throw Error('Enter number of rounds again, 1-5.')
+        } else if (startValueArray[0] % 1 === 0) {
+          numberOfRounds = parseInt(startValueArray[0])
+          startValueObject.numberOfRounds = parseInt(startValueArray[0])
+
+          if (startValueArray[1] % 1 === 0) {
+            numberOfPlayers = parseInt(startValueArray[1])
+            startValueObject.numberOfPlayers = parseInt(startValueArray[1])
+            
+          } else {
+            numberOfRounds = startValueArray[0]
+            numberOfPlayers = startValueArray[1]
+
+            startValueObject.numberOfRounds = startValueArray[0]
+            startValueObject.numberOfPlayers = startValueArray[1]
+            console.log(startValueObject)
+            
+            
             
           }
-        }
-      
-    } else if (startValueArray.length > 2) {
-      throw Error('Enter only up to two parameters!')
-    }
- 
-  console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
-  
-  console.log('Number Of Rounds: ' + numberOfRounds)
-  console.log('Number Of Players: ' + (numberOfPlayers))
-  console.log('Dealer' + '\n')
-  
-  console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
-  
+          
+        } 
+      }
+  } else if (startValueArray.length > 2) {
+    throw Error('Enter only up to two parameters!')
+  }
+
+    
+  const cardTable = new CardTable(startValueObject.numberOfPlayers)
+  cardTable.assign(startValueObject.numberOfPlayers)
+  cardTable.playRounds(startValueObject.numberOfRounds)
+  console.log("86", cardTable)
+  console.log("The assigned Players: ", startValueObject.numberOfPlayers)
+  console.log('\n' + 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
+
+  for(let rounds = 1; rounds < startValueObject.numberOfRounds + 1; rounds++) {
+    console.log('\n', `------ Round # ${rounds} ----------`, '\n')
+  }
+
+    
   // Create a deck, view its 52 playing cards,...
  
   // now we know how many players that have to be created and number of rounds
- 
- 
  
   const deck = new Deck()
   // ...shuffle the deck and show the playing cards again.
@@ -90,9 +114,8 @@ try {
   let deltCard = ""
   let hit = 1
   let i = 1
-
-
-
+  
+/** 
   for(rounds = 1; rounds < numberOfRounds + 1; rounds++) {
     console.log('\n', `------ Round # ${rounds} ----------`, '\n')
 
@@ -163,7 +186,7 @@ try {
       } 
       
     }
-  }
+  }*/
   console.log('\n' + 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
 
 

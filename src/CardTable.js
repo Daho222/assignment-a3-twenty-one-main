@@ -17,24 +17,53 @@ export class CardTable {
     #deck
     #discardPile
     #players
+    deltCard
 
     constructor (numberOfPlayers) {
+        this.#deck = new Deck()
+        this.#discardPile = []
+        this.#players = []
+        this.#dealer = new Player("Dealer", 14)
         this.numberOfPlayers = numberOfPlayers
+        
+    }
+    assign(numberOfPlayers) {
+        if (numberOfPlayers < 2 && numberOfPlayers > 0) {
+            let player = new Player(("Player#1"), 14)
+            this.#players.push(player.nickname)
+        } else {
+            for(let i = 1; i < numberOfPlayers; i++) {
+                let player = new Player(("Player#" + i), 14)
+                this.#players.push(player.nickname)  
+                        
+                //player.discardHand()
+                let hit = 1
+            }
+        }
+        console.log("43 Assigned Players: " + this.#players)
     }
 
+    /**
     #compareHands (dealer, player) {
-
-        return player
-    
+        if (dealer.valueOf() < 21 && player.valueOf() < 21 && dealer.valueOf() < player.valueOf()) {
+            return player
+          } else {
+            console.log("Dealer wins!!!!")
+            return dealer
+          }
     }
     #deal () {
-        return playingcard
+        const deck = new Deck()
+        const deltCard = deck.deal()
+        return deltCard
     }
     #playOut (dealer, player) {
 
     }
-    playRounds (numberOfRounds) {
+  */playRounds (numberOfRounds) {
+      console.log(this.#deck)  
+      
+      console.log("Rounds: " + numberOfRounds)
 
     }
-
 }
