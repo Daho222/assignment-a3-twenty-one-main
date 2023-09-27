@@ -41,7 +41,7 @@ try {
     } else {
       startValueObject.numberOfRounds = startValueArray[0]
       startValueObject.numberOfPlayers = 3
-      console.log(startValueObject)     
+      console.log("44", startValueObject)     
     }
     
   } else if (startValueArray.length === 2) {
@@ -94,27 +94,27 @@ try {
  
   // now we know how many players that have to be created and number of rounds
  
-  const deck = new Deck()
+ // const deck = new Deck()
   // ...shuffle the deck and show the playing cards again.
-  deck.shuffle()
+  /*deck.shuffle()
   console.log("Shuffled Deck: " + '\n' + '\n' + deck.toString(), '\n')
   console.log("Deck count: " + deck.count)
 
   console.log('\n' + 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
-  
+  */
   //let deltCard = deck.deal()
   
   
   // Put the delt card into hand of player one
 
   //const player1 = new Player('Ben', 14)
-  const dealer = new Player('Dealer', 14)
+  /*const dealer = new Player('Dealer', 14)
   let players = []  
   let rounds = 0
   let deltCard = ""
   let hit = 1
   let i = 1
-  
+  */
 /** 
   for(rounds = 1; rounds < numberOfRounds + 1; rounds++) {
     console.log('\n', `------ Round # ${rounds} ----------`, '\n')

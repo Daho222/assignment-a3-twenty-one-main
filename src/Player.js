@@ -80,7 +80,7 @@ export class Player {
   get nickname () {
     return this.#nickname
   }
-
+  
   /**
    * Adds cards to players hand
    *
