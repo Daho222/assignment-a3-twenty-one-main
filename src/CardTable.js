@@ -114,7 +114,6 @@ export class CardTable {
         
         for(let rounds = 1; rounds < numberOfRounds + 1; rounds++) {
             console.log('\n', `------ Rounds # ${rounds} ----------`, '\n')
-            console.log(this.#deal().valueOf()) 
             
             if (this.numberOfPlayers < 2 && this.numberOfPlayers > 0) {
                 let player = new Player(("Player#1"), 14)
@@ -126,7 +125,7 @@ export class CardTable {
                         
                         if (player.valueOf() < 22) {
                             while (player.canHit === true) {
-                        
+                              if (this.#deck.count)  
                               let deltCard = this.#deal()
                               player.addToHand(deltCard)
                               console.log("Deck count: " + this.#deck.count + "  Delt Card:  " + deltCard.toString(), '\n')
@@ -145,52 +144,41 @@ export class CardTable {
                         
                             }
                             if (player.isBusted === false && player.canHit === false) {
-                              while (dealer.canHit === true) {
-                                console.log('\n', `------ Dealer Hit # ${hit} ----------`, '\n')
+                            
+                            console.log('\n', `------ Dealer ----------`, '\n')  
+                              while (this.#dealer.canHit === true) {
                     
                                 let deltCard = this.#deal()
-                                dealer.addToHand(deltCard)
+                                this.#dealer.addToHand(deltCard)
                                 console.log("Deck count: " + this.#deal.count + "  Delt Card:  " + deltCard.toString(), '\n')
-                                console.log("Dealer: " + dealer.toString())
+                                console.log("Dealer: " + this.#dealer.toString())
                     
                               
-                                if (dealer.isNaturelWinner) {
+                                if (this.#dealer.isNaturelWinner) {
                                   console.log("21! Dealer Wins!")
                                   
                                 }
                                 
-                                if (dealer.isBusted) {
+                                if (this.#dealer.isBusted) {
                                   console.log("Dealer busted!!!")
                                   console.log("Player wins!")
-                                  
-                    
                                 }
                               }
-                              if (dealer.valueOf() < 21 && player.valueOf() < 21 && dealer.valueOf() < player.valueOf()) {
+                              if (this.#dealer.valueOf() < 21 && player.valueOf() < 21 && this.#dealer.valueOf() < player.valueOf()) {
                                 console.log("Player1 wins!!!")
-                                dealer.discardHand()
+                                this.#dealer.discardHand()
                                 player.discardHand()
-                              } else {
+                              } else if (this.#dealer.isBusted === false) {
                                 console.log("Dealer wins!!!!")
-                                dealer.discardHand()
+                                this.#dealer.discardHand()
                                 player.discardHand()
                               }
-                            }
-                            
-                    
+                            }                  
                                 
                         //player.discardHand()
                     }
                 }
-            }
-                  
-            
-            for(let i = 0; i< this.#players.length; i++) {
-                this.#players[i] 
-                console.log(this.#players[i])
-
-                
-            }
-    }
+            }          
+        }
     }
 }

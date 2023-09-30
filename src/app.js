@@ -3,7 +3,7 @@
  * @module src/app
  * @author Johan Leitet <johan.leitet@lnu.se>
  * @author Mats Loock <mats.loock@lnu.se>
- * @author // TODO: YOUR NAME <YOUR EMAIL>
+ * @author Daniel Holdenmark <dh222sr@student.lnu.se>
  * @version 2.0.0
  */
 
@@ -64,30 +64,19 @@ try {
             startValueObject.numberOfRounds = startValueArray[0]
             startValueObject.numberOfPlayers = startValueArray[1]
             console.log(startValueObject)
-            
-            
-            
           }
-          
         } 
       }
   } else if (startValueArray.length > 2) {
     throw Error('Enter only up to two parameters!')
   }
 
-    
   const cardTable = new CardTable(startValueObject.numberOfPlayers)
   //cardTable.assign(startValueObject.numberOfPlayers)
   console.log(startValueObject.numberOfRounds)
   cardTable.playRounds(startValueObject.numberOfRounds)
   
   console.log('\n' + 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
-
-/*  for(let rounds = 1; rounds < startValueObject.numberOfRounds + 1; rounds++) {
-    console.log('\n', `------ Round # ${rounds} ----------`, '\n')
-  }
-*/
-
 
   //cardTable.playRounds(startValueObject.numberOfRounds)
     
@@ -97,104 +86,7 @@ try {
  
  // const deck = new Deck()
   // ...shuffle the deck and show the playing cards again.
-  /*deck.shuffle()
-  console.log("Shuffled Deck: " + '\n' + '\n' + deck.toString(), '\n')
-  console.log("Deck count: " + deck.count)
 
-  console.log('\n' + 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
-  */
-  //let deltCard = deck.deal()
-  
-  
-  // Put the delt card into hand of player one
-
-  //const player1 = new Player('Ben', 14)
-  /*const dealer = new Player('Dealer', 14)
-  let players = []  
-  let rounds = 0
-  let deltCard = ""
-  let hit = 1
-  let i = 1
-  */
-/** 
-  for(rounds = 1; rounds < numberOfRounds + 1; rounds++) {
-    console.log('\n', `------ Round # ${rounds} ----------`, '\n')
-
-    for(i = 1; i < numberOfPlayers + 1; i++) {
-      let player = new Player(("Player#" + i), 14)
-      players.push(player.nickname)
-    
-      player.discardHand()
-      hit = 1
-      if (player.valueOf() < 22) {
-        while (player.canHit === true) {
-          console.log('\n', `------ ${player.nickname} Hit # ${hit} ----------`, '\n')
-
-          deltCard = deck.deal()
-          player.addToHand(deltCard)
-          console.log("Deck count: " + deck.count + "  Delt Card:  " + deltCard.toString(), '\n')
-          console.log(player.nickname + ": " + player.toString())
-          console.log(player.valueOf())
-          
-          if (player.isNaturelWinner) {
-            console.log("21! Player Wins!")
-            
-          }
-          if (player.isBusted) {
-            console.log("Player busted!!!")
-            console.log("Dealer wins!")
-            
-          }
-          
-          hit += 1
-        }
-        if (player.isBusted === false && player.canHit === false) {
-          hit = 1
-          while (dealer.canHit === true) {
-            console.log('\n', `------ Dealer Hit # ${hit} ----------`, '\n')
-
-            let deltCard = deck.deal()
-            dealer.addToHand(deltCard)
-            console.log("Deck count: " + deck.count + "  Delt Card:  " + deltCard.toString(), '\n')
-            console.log("Dealer: " + dealer.toString())
-
-          
-            if (dealer.isNaturelWinner) {
-              console.log("21! Dealer Wins!")
-              
-            }
-            
-            if (dealer.isBusted) {
-              console.log("Dealer busted!!!")
-              console.log("Player wins!")
-              
-
-            }
-            hit += 1
-          }
-          if (dealer.valueOf() < 21 && player.valueOf() < 21 && dealer.valueOf() < player.valueOf()) {
-            console.log("Player1 wins!!!")
-            dealer.discardHand()
-            player.discardHand()
-          } else {
-            console.log("Dealer wins!!!!")
-            dealer.discardHand()
-            player.discardHand()
-          }
-        }
-        
-      
-      } 
-      
-    }
-  }*/
-  console.log('\n' + 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
-
-
- // const gameTable = new CardTable(numberOfPlayers)
-  
-  //console.log("Dealer is: " + gameTable.dealer + '\n')
-  
  
 } catch (e) {
   console.error(e.message)
