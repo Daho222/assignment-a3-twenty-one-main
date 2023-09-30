@@ -101,7 +101,9 @@ export class Player {
    *
    */
   discardHand () {
-    return this.#hand = []
+    let discardedCards = this.#hand.values()
+    this.#hand = []
+    return discardedCards
   }
 
   /**
