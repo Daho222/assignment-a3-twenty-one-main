@@ -26,28 +26,10 @@ export class CardTable {
         this.#players = []
         this.#dealer = new Player("Dealer", 14)
         this.numberOfPlayers = numberOfPlayers
+        this.hit = 0
         
     }
-    assign(numberOfPlayers) {
-        if (numberOfPlayers < 2 && numberOfPlayers > 0) {
-            let player = new Player(("Player#1"), 14)
-            this.#players.push(player)
-        } else {
-            for(let i = 1; i < numberOfPlayers; i++) {
-                let player = new Player(("Player#" + i), 14)
-                this.#players.push(player)  
-                
-                        
-                //player.discardHand()
-                let hit = 1
-            }
-        }
-        for(let i = 0; i< this.#players.length; i++) {
-            console.log(this.#players[i])
-        }
-        
-        console.log("43 Assigned Players: ", this.#players, " Dealer: " + this.#dealer.nickname)
-    }
+    
 
     /**
     #compareHands (dealer, player) {
@@ -69,82 +51,146 @@ export class CardTable {
     }
     
     #playOut (dealer, player) {
-        for(rounds = 1; rounds < numberOfRounds + 1; rounds++) {
-            console.log('\n', `------ Round # ${rounds} ----------`, '\n')
         
-            for(i = 1; i < numberOfPlayers + 1; i++) {
-              let player = new Player(("Player#" + i), 14)
-              players.push(player.nickname)
-            
-              player.discardHand()
-              hit = 1
-              if (player.valueOf() < 22) {
-                while (player.canHit === true) {
-                  console.log('\n', `------ ${player.nickname} Hit # ${hit} ----------`, '\n')
-        
-                  deltCard = deck.deal()
-                  player.addToHand(deltCard)
-                  console.log("Deck count: " + deck.count + "  Delt Card:  " + deltCard.toString(), '\n')
-                  console.log(player.nickname + ": " + player.toString())
-                  console.log(player.valueOf())
-                  
-                  if (player.isNaturelWinner) {
-                    console.log("21! Player Wins!")
-                    
-                  }
-                  if (player.isBusted) {
-                    console.log("Player busted!!!")
-                    console.log("Dealer wins!")
-                    
-                  }
-                  
-                  hit += 1
-                }
-                if (player.isBusted === false && player.canHit === false) {
-                  hit = 1
-                  while (dealer.canHit === true) {
-                    console.log('\n', `------ Dealer Hit # ${hit} ----------`, '\n')
-        
-                    let deltCard = deck.deal()
-                    dealer.addToHand(deltCard)
-                    console.log("Deck count: " + deck.count + "  Delt Card:  " + deltCard.toString(), '\n')
-                    console.log("Dealer: " + dealer.toString())
-        
-                  
-                    if (dealer.isNaturelWinner) {
-                      console.log("21! Dealer Wins!")
-                      
-                    }
-                    
-                    if (dealer.isBusted) {
-                      console.log("Dealer busted!!!")
-                      console.log("Player wins!")
-                      
-        
-                    }
-                    hit += 1
-                  }
-                  if (dealer.valueOf() < 21 && player.valueOf() < 21 && dealer.valueOf() < player.valueOf()) {
-                    console.log("Player1 wins!!!")
-                    dealer.discardHand()
-                    player.discardHand()
-                  } else {
-                    console.log("Dealer wins!!!!")
-                    dealer.discardHand()
-                    player.discardHand()
-                  }
-                }
-                
-              
-              } 
-              
-            }
-          }
-    }
-    playRounds (numberOfRounds) {
-      console.log(this.#deal())  
-      
-      console.log("Rounds: " + numberOfRounds, this.#deal())
+        if (player.valueOf() < 22) {
+        while (player.canHit === true) {
+            console.log('\n', `------ ${player.nickname} Hit # ${hit} ----------`, '\n')
 
+            let deltCard = this.#deck.deal()
+            player.addToHand(deltCard)
+            console.log("Deck count: " + this.#deck.count + "  Delt Card:  " + deltCard.toString(), '\n')
+            console.log(player.nickname + ": " + player.toString())
+            console.log(player.valueOf())
+            
+            if (player.isNaturelWinner) {
+            console.log("21! Player Wins!")
+            
+            }
+            if (player.isBusted) {
+            console.log("Player busted!!!")
+            console.log("Dealer wins!")
+            
+            }
+            
+            hit += 1
+        }
+        if (player.isBusted === false && player.canHit === false) {
+            hit = 1
+            while (dealer.canHit === true) {
+            console.log('\n', `------ Dealer Hit # ${hit} ----------`, '\n')
+
+            let deltCard = this.#deck.deal()
+            dealer.addToHand(deltCard)
+            console.log("Deck count: " + this.#deck.count + "  Delt Card:  " + deltCard.toString(), '\n')
+            console.log("Dealer: " + dealer.toString())
+
+            
+            if (dealer.isNaturelWinner) {
+                console.log("21! Dealer Wins!")
+                
+            }
+            
+            if (dealer.isBusted) {
+                console.log("Dealer busted!!!")
+                console.log("Player wins!")
+                
+
+            }
+            hit += 1
+            }
+            if (dealer.valueOf() < 21 && player.valueOf() < 21 && dealer.valueOf() < player.valueOf()) {
+            console.log("Player1 wins!!!")
+            } else {
+            console.log("Dealer wins!!!!")
+            }
+        }
+        
+        
+        } 
+        
+    }
+    
+    playRounds (numberOfRounds) {
+        
+        for(let rounds = 1; rounds < numberOfRounds + 1; rounds++) {
+            console.log('\n', `------ Rounds # ${rounds} ----------`, '\n')
+            console.log(this.#deal().valueOf()) 
+            
+            if (this.numberOfPlayers < 2 && this.numberOfPlayers > 0) {
+                let player = new Player(("Player#1"), 14)
+                this.#players.push(player)
+                } else {
+                    for(let i = 1; i < this.numberOfPlayers; i++) {
+                        let player = new Player(("Player#" + i), 14)
+                        this.#players.push(player)  
+                        
+                        if (player.valueOf() < 22) {
+                            while (player.canHit === true) {
+                        
+                              let deltCard = this.#deal()
+                              player.addToHand(deltCard)
+                              console.log("Deck count: " + this.#deck.count + "  Delt Card:  " + deltCard.toString(), '\n')
+                              console.log(player.nickname + ": " + player.toString())
+                              console.log(player.valueOf())
+                              
+                              if (player.isNaturelWinner) {
+                                console.log("21! Player Wins!")
+                                
+                              }
+                              if (player.isBusted) {
+                                console.log("Player busted!!!")
+                                console.log("Dealer wins!")
+                                
+                              }
+                        
+                            }
+                            if (player.isBusted === false && player.canHit === false) {
+                              while (dealer.canHit === true) {
+                                console.log('\n', `------ Dealer Hit # ${hit} ----------`, '\n')
+                    
+                                let deltCard = this.#deal()
+                                dealer.addToHand(deltCard)
+                                console.log("Deck count: " + this.#deal.count + "  Delt Card:  " + deltCard.toString(), '\n')
+                                console.log("Dealer: " + dealer.toString())
+                    
+                              
+                                if (dealer.isNaturelWinner) {
+                                  console.log("21! Dealer Wins!")
+                                  
+                                }
+                                
+                                if (dealer.isBusted) {
+                                  console.log("Dealer busted!!!")
+                                  console.log("Player wins!")
+                                  
+                    
+                                }
+                              }
+                              if (dealer.valueOf() < 21 && player.valueOf() < 21 && dealer.valueOf() < player.valueOf()) {
+                                console.log("Player1 wins!!!")
+                                dealer.discardHand()
+                                player.discardHand()
+                              } else {
+                                console.log("Dealer wins!!!!")
+                                dealer.discardHand()
+                                player.discardHand()
+                              }
+                            }
+                            
+                    
+                                
+                        //player.discardHand()
+                    }
+                }
+            }
+                  
+            
+            for(let i = 0; i< this.#players.length; i++) {
+                this.#players[i] 
+                console.log(this.#players[i])
+
+                
+            }
+    }
     }
 }

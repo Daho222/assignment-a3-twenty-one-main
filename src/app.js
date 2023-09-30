@@ -9,8 +9,6 @@
 
 // TODO: Replace the code below with your own game logic.
 
-import { Deck } from './Deck.js'
-import { Player } from './Player.js'
 import { CardTable } from './CardTable.js'
 
 try {
@@ -79,16 +77,19 @@ try {
 
     
   const cardTable = new CardTable(startValueObject.numberOfPlayers)
-  cardTable.assign(startValueObject.numberOfPlayers)
+  //cardTable.assign(startValueObject.numberOfPlayers)
+  console.log(startValueObject.numberOfRounds)
   cardTable.playRounds(startValueObject.numberOfRounds)
-  console.log("86", cardTable)
-  console.log("The assigned Players: ", startValueObject.numberOfPlayers)
+  
   console.log('\n' + 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
 
-  for(let rounds = 1; rounds < startValueObject.numberOfRounds + 1; rounds++) {
+/*  for(let rounds = 1; rounds < startValueObject.numberOfRounds + 1; rounds++) {
     console.log('\n', `------ Round # ${rounds} ----------`, '\n')
   }
+*/
 
+
+  //cardTable.playRounds(startValueObject.numberOfRounds)
     
   // Create a deck, view its 52 playing cards,...
  
