@@ -17,181 +17,175 @@ export class CardTable {
     #deck
     #discardPile
     #players
-    deltCard
 
-    constructor (numberOfPlayers) {
+    constructor(numberOfPlayers) {
         this.#deck = new Deck()
         this.#deck.shuffle()
         this.#discardPile = []
         this.#players = []
         this.#dealer = new Player("Dealer", 14)
-        this.numberOfPlayers = numberOfPlayers        
+        this.numberOfPlayers = numberOfPlayers
     }
-    
 
-    
-    #compareHands (dealer, player) {
-        if (dealer.valueOf() < 21 && player.valueOf() < 21 && dealer.valueOf() < player.valueOf()) {
-            return player
-          } else {
-            console.log("Dealer wins!!!!")
-            return dealer
-          }
+
+
+    #compareHands(dealer, player) {
+        console.log("comparehands comparehands")
+        if (dealer.valueOf() < player.valueOf()) {
+            console.log("35 Player1 wins!!!")
+
+            //            this.#discardPile.push(dealer.discardHand())
+
+            //          console.log("191 Discard Pile: " + this.#discardPile)
+            //this.#dealer.discardHand()
+            //player.discardHand()
+        } else {
+            console.log("43 Dealer wins!!!!")
+            //        this.#discardPile.push(dealer.discardHand())
+            //      console.log("164 Discard Pile: " + this.#discardPile)
+
+            //    console.log("143 Discard Pile number of cards: " + this.#discardPile.length, '\n')
+
+        }
     }
-    #deal () {
-        console.log(this.#deck.toString())
-        
-        while(this.#deck.count > 1) {
-            console.log("45 deck count " + this.#deck.count + " +XXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    #deal() {
+
+        console.log('\n' + "The Deck: " + this.#deck.toString(), '\n')
+
+        while (this.#deck.count > 1) {
+            console.log("46 Deck count " + this.#deck.count, '\n')
             const deltCard = this.#deck.deal()
             return deltCard
         }
-        if(this.#deck.count === 1) {
-        console.log("49 last card " + this.#deck.toString())
-        this.#discardPile.push(this.#deck)
-        for (let i = this.#discardPile.length - 1; i > 0; i--) {
-            const randomIndex = Math.floor(Math.random() * (i + 1))
-            ;[this.#discardPile[i], this.#discardPile[randomIndex]] = [this.#discardPile[randomIndex], this.#discardPile[i]]
-          }
-          console.log("54 " + this.#discardPile)
-          const deltCard = this.#discardPile.pop()
-        return deltCard
-    }
-        
-    }
-    
-    #playOut (dealer, player) {
-        console.log("jjjjjjjjjjjjjjjjjjjjj")
-        if (player.valueOf() < 22) {
-            while (player.canHit === true) {
-                
-              let deltCard = this.#deal()
-              player.addToHand(deltCard)
+        if (this.#deck.count === 1) {
+            console.log("49 Last card " + this.#deck)
+            console.log("53 Deck count " + this.#deck.count, '\n')
 
-              console.log("Delt Card:  " + deltCard.toString(), '\n')
-              console.log(player.nickname + ": " + player.toString())
-              console.log("73 Player hand value: " + player.valueOf())
-              
-                            
-              if (player.isNaturelWinner) {
-                console.log("21! Player Wins!")
-                let iterator = player.discardHand()
-                for (const value of iterator) {
-                  console.log("140 " + value.toString())
-                  this.#discardPile.push(value.toString())
-                }
-                console.log("142 Discard Pile: " + this.#discardPile)
-                
-              }
-              if (player.isBusted) {
-                console.log("Player busted!!!")
-                console.log("Dealer wins!") 
-                let iterator = player.discardHand()
-                for (const value of iterator) {
-                  console.log("140 " + value.toString())
-                  this.#discardPile.push(value.toString())
-                  }
-                  console.log("142 Discard Pile: " + this.#discardPile)
-                
-              }
+            this.#discardPile.push(this.#deck)
+            console.log("56 Complete discard pile: " + this.#discardPile, '\n')
+            for (let i = this.#discardPile.length - 1; i > 0; i--) {
+                const randomIndex = Math.floor(Math.random() * (i + 1))
+                    ;[this.#discardPile[i], this.#discardPile[randomIndex]] = [this.#discardPile[randomIndex], this.#discardPile[i]]
             }
-            
-            if (player.isBusted === false && player.canHit === false && player.isNaturelWinner === false) {
-                console.log("151 " + player.toString())
-                let iterator = player.discardHand()
-                for (const value of iterator) {
-                  console.log("140 " + value.toString())
-                  this.#discardPile.push(value.toString())
-                  }
-                  console.log("142 Discard Pile: " + this.#discardPile)
-                
-                console.log('\n', `------ Dealer ----------`, '\n') 
-                console.log("160 " + dealer.toString(), '\n') 
-                while (dealer.canHit === true) {
-                    
-                    let deltCard = this.#deal()
-                    dealer.addToHand(deltCard)
-                    console.log("Delt Card:  " + deltCard.toString(), '\n')
-                    console.log("Dealer: " + dealer.toString())
-        
-                    if (this.#dealer.isNaturelWinner) {
-                        console.log("21! Dealer Wins!")  
-                        let iteratorDealer = dealer.discardHand()
-                        for (const value of iteratorDealer) {
-                        console.log("167 " + value.toString())
-                        this.#discardPile.push(value.toString())
-                        }
-                        console.log("169 Discard Pile: " + this.#discardPile)                     
-                                    
-                    }
-                    
-                    if (dealer.isBusted) {
-                        console.log("Dealer busted!!!")
-                        console.log("Player wins!")
-                        let iteratorDealer = dealer.discardHand()
-                        for (const value of iteratorDealer) {
-                        console.log("178 " + value.toString())
-                        this.#discardPile.push(value.toString())
-                        }
-                        console.log("180 Discard Pile: " + this.#discardPile)                     
-                        
-                    }
-              }
-              console.log("ttttttttttttttttttttttt")
-              if (dealer.valueOf() < 21 && player.valueOf() < 21 && dealer.valueOf() < player.valueOf()) {
-                console.log("Player1 wins!!!")
-                
-                let iteratorDealer = dealer.discardHand()
-                for (const value of iteratorDealer) {
-                console.log("189 " + value.toString())
-                this.#discardPile.push(value.toString())
-                                     
-                }
-                console.log("191 Discard Pile: " + this.#discardPile)
-                //this.#dealer.discardHand()
-                //player.discardHand()
-              } else if (dealer.valueOf() < 21 && player.valueOf() < 21 && dealer.valueOf() > player.valueOf()) {
-                console.log("Dealer wins!!!!")
-                let iteratorDealer = dealer.discardHand()
-                for (const value of iteratorDealer) {
-                console.log("175 " + value.toString())
-                this.#discardPile.push(value.toString())
+            console.log("54 new shuffled pile: " + this.#discardPile)
+            return deltCard
+        }
+        if (this.#deck.count === 0) {
+            while (this.#discardPile.length > 1) {
 
-                }
-                console.log("177 Discard Pile: " + this.#discardPile) 
-                                 
-                }
+                const deltCard = this.#discardPile.pop()
+                console.log("64 Delt card: " + deltCard)
+                console.log("69 type: " + typeof (deltCard))
+                return deltCard
+            }
+        }
 
-            }      
-        }      
-            
-}
 
-    
-    playRounds (numberOfRounds) {
+    }
 
-        for(let rounds = 1; rounds < numberOfRounds + 1; rounds++) {
+    #playOut(dealer, player) {
+        console.log("playOut ", player.nickname)
+
+        // if (player.valueOf() < 22) {
+        while (player.canHit === true) {
+
+            let deltCard = this.#deal()
+            player.addToHand(deltCard, '\n')
+            //this.#discardPile.push(this.#deck.add(deltCard))
+            //console.log("96 " + this.#deck.toString())
+            //console.log("73 Delt Card rank:  " + deltCard.rank)
+            console.log("74 " + player.nickname + ": " + player.toString())
+            console.log("75 " + player.nickname + " hand total value: " + player.valueOf())
+
+
+            if (player.isNaturalWinner) {
+                console.log("21! Player Wins!")
+                //                this.#discardPile.push(player.discardHand())
+                break
+
+            }
+            if (player.isBusted) {
+                console.log("Player busted!!!!!!!!!!!!!!")
+                console.log("Dealer wins!")
+                break
+                /**        let iterator = player.discardHand()
+                        for (const value of iterator) {
+                            console.log("value: " + value)
+                            this.#discardPile.push(value)
+                        } */
+                //              this.#discardPile.push(player.discardHand())
+
+            }
+        }
+        while (dealer.canHit === true) {
+
+            let deltCardDealer = this.#deal()
+            dealer.addToHand(deltCardDealer, '\n')
+            console.log("Delt Card Dealer:  " + deltCardDealer.toString(), '\n')
+            console.log("Dealer: " + dealer.toString())
+            console.log("131 " + dealer.nickname + " hand total value: " + dealer.valueOf())
+
+            if (dealer.isNaturelWinner) {
+                console.log("21! Dealer Wins!")
+                this.#discardPile.push(dealer.discardHand())
+                this.#discardPile.push(player.discardHand())
+                break
+            }
+            if (dealer.isBusted) {
+                console.log("Dealer busted!!!")
+                console.log("Player wins!")
+                this.#discardPile.push(dealer.discardHand())
+                break
+            }
+
+
+        }
+
+    }
+
+    playRounds(numberOfRounds) {
+        for (let rounds = 1; rounds < numberOfRounds + 1; rounds++) {
             console.log('\n', `------ Rounds # ${rounds} ----------`, '\n')
-            
-            if (this.numberOfPlayers < 2 && this.numberOfPlayers > 0) {
-                let player = new Player(("Player#1"), 14)
-                console.log("kkkkkkkkkkkkk " + player.nickname)
-                this.#players.push(player)
-                this.#playOut(this.#dealer, player)
-                } else {
-                    for(let i = 1; i < this.numberOfPlayers; i++) {
-                        let player = new Player(("Player#" + i), 14)
-                        console.log("gggggggggggggggggggggggg")
-                        this.#players.push(player)  
-                             
-                      
-                }
-                for (let player of this.#players) {
-                    console.log("eeeeeeeeeeeebbbbbbbbb " + player)
-                    this.#playOut(this.#dealer, player)
 
-                }
-            
+            for (let i = 1; i < this.numberOfPlayers; i++) {
+                let player = new Player(("Player#" + i), 14)
+                this.#players.push(player)
+            }
+            for (let playerItem of this.#players) {
+                console.log("AAAAAAAAAAAAAAAAA")
+                this.#playOut(this.#dealer, playerItem)
+                this.#compareHands(this.#dealer, playerItem)
+                this.#discardPile.push(playerItem.discardHand())
+
+            }
+            console.log(this.#discardPile)
+
+            /*  if (this.numberOfPlayers === 1) {
+                 let player = new Player(("Player#1"), 14)
+                 console.log("one player, creating new player for game " + player.nickname)
+                 this.#players.push(player)
+                 this.#playOut(this.#dealer, player)
+                 
+                 this.#discardPile.push(player.discardHand())
+                 this.#discardPile.push(this.#dealer.discardHand())
+             
+             } else {
+                 for (let i = 1; i < this.numberOfPlayers; i++) {
+                     let player = new Player(("Player#" + i), 14)
+                     this.#players.push(player)
+                 }
+             }
+             for (let playerItem of this.#players) {
+                 console.log("AAAAAAAAAAAAAAAAA")
+ 
+                 this.#playOut(this.#dealer, playerItem)
+                 this.#discardPile.push(playerItem.discardHand())
+                 this.#discardPile.push(this.#dealer.discardHand())
+                 console.log("180 Discard Pile: " + this.#discardPile)
+ 
+             } */
+
+
+        }
     }
 }
-}}

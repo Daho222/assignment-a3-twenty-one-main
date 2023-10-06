@@ -10,6 +10,7 @@
 // TODO: Replace the code below with your own game logic.
 
 import { CardTable } from './CardTable.js'
+import { Player } from './Player.js'
 
 try {
 
@@ -71,12 +72,13 @@ try {
     throw Error('Enter only up to two parameters!')
   }
 
+
   const cardTable = new CardTable(startValueObject.numberOfPlayers)
   //cardTable.assign(startValueObject.numberOfPlayers)
-  console.log(startValueObject.numberOfRounds)
   cardTable.playRounds(startValueObject.numberOfRounds)
   
   console.log('\n' + 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
+
 
   //cardTable.playRounds(startValueObject.numberOfRounds)
     

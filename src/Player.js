@@ -27,33 +27,36 @@ export class Player {
    * @param standValue
    * @param hand
    */
-  constructor (nickname, standValue = 14) {
+  constructor(nickname, standValue) {
     this.#nickname = nickname
+    standValue = 14
     this.#standValue = standValue
     this.#hand = []
+    
   }
-
+  
   /**
    * Returns canHit.
    *
    */
-  get canHit () {
-      if (this.#hand.length === 5) {
-        console.log("Five Cards")
-        return false
-      } else if (this.valueOf() < 15) {
-          return true
-        } else {
-          return false
-        }     
+  get canHit() {
+    
+    if (this.#hand.length === 5) {
+      console.log("Five Cards")
+      return false
+    } else if (this.valueOf() < 15) {
+      return true
+    } else {
+      return false
     }
+  }
   //}
 
   /**
    * Returns isBusted.
    *
    */
-  get isBusted () {
+  get isBusted() {
     if (this.valueOf() > 21) {
       return true
     } else {
@@ -65,7 +68,7 @@ export class Player {
    * Returns isNaturalWinner.
    *
    */
-  get isNaturelWinner () {
+  get isNaturalWinner() {
     if (this.valueOf() === 21) {
       return true
     } else {
@@ -77,32 +80,41 @@ export class Player {
    * Returns nickname.
    *
    */
-  get nickname () {
+  get nickname() {
     return this.#nickname
   }
-  
+
   /**
    * Adds cards to players hand
    *
    * @param playingCard
    */
-  addToHand (playingCard) {
-    if(playingCard.valueOf() === 1 && this.#hand.valueOf() < 11) {
-      playingCard = 11
-      this.#hand.push(playingCard)
+  addToHand(playingCard) {
+    if (playingCard.valueOf() === 1) {
+      if (this.#hand.valueOf() > 7) {
+        this.#hand.push(playingCard)
+      } else {
+        playingCard = new PlayingCard(14, playingCard.suit)
+        this.#hand.push(playingCard)
+      }
     } else {
-      this.#hand.push(playingCard)  
+      this.#hand.push(playingCard)
     }
-    
   }
 
   /**
    * Discards hand.
    *
    */
-  discardHand () {
-    let discardedCards = this.#hand.values()
+  discardHand() {
+    let discardedCards = []
+    this.#hand.forEach(function (element) {
+      discardedCards.push(element)
+    });
+    console.log("Discarded cards: ", discardedCards)
+
     this.#hand = []
+
     return discardedCards
   }
 
@@ -111,7 +123,7 @@ export class Player {
    *
    * @returns {string} A string that represents the current object.
    */
-  toString () {
+  toString() {
     return this.#hand.join(' ')
   }
 
@@ -120,8 +132,8 @@ export class Player {
    *
    * @returns {number} The primitive value of the specified object.
    */
-  valueOf () {
-    
+  valueOf() {
+
     let value = this.#hand.reduce(function (a, b) {
       return a + b;
     }, 0);
