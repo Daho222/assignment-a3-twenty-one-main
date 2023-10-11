@@ -29,9 +29,9 @@ export class CardTable {
 
     #compareHands(dealer, player) {
         if (dealer.valueOf() < player.valueOf()) {
-            console.log(player.nickname + " wins!!!")
+            console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + "Dealer: " + `${dealer.toString()} (${dealer.valueOf()}) ` + player.nickname + " wins! 🎉", '\n')
         } else {
-            console.log("Dealer wins!!!!")
+            console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + "Dealer: " + `${dealer.toString()} (${dealer.valueOf()}) ` + " Dealer wins! ☹️", '\n')
         }
     }
 
@@ -42,7 +42,7 @@ export class CardTable {
             return deltCard
         }
         if (this.#deck.count === 1) {
-            console.log("49 Last card " + this.#deck)
+            console.log("Last card " + this.#deck)
 
             let newDeck = [];
             for (let i = 0; i < this.#discardPile.length; i++) {
@@ -58,9 +58,9 @@ export class CardTable {
                 const randomIndex = Math.floor(Math.random() * (i + 1))
                     ;[this.#discardPile[i], this.#discardPile[randomIndex]] = [this.#discardPile[randomIndex], this.#discardPile[i]]
             }
-            console.log("New shuffled pile: ", this.#discardPile)
+            console.log("New shuffled pile! Number of Cards in new Deck: " + this.#discardPile.length)
             const deltCardObject = this.#discardPile.pop()
-            console.log("Delt card: " + deltCardObject)
+            console.log("Delt card: " + deltCardObject, '\n')
             const deltCard = deltCardObject
 
             return deltCard
@@ -68,28 +68,19 @@ export class CardTable {
     }
 
     #playOut(dealer, player) {
-        console.log("PlayOut: ")
-
         while (player.canHit === true) {
 
             let deltCard = this.#deal()
             player.addToHand(deltCard, '\n')
 
-
             if (player.isNaturalWinner) {
-                console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})`)
-                console.log("21! Player Wins!")
-                break
+                console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + player.nickname + " wins! 🎉", '\n')
             }
             if (player.isBusted) {
-                console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})`)
-                console.log("Player busted!!!!!!!!!!!!!!")
-                console.log("Dealer wins!")
-                break
+                console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + " BUSTED! " + "Dealer wins! ☹️", '\n')
             }
         }
         if (player.isBusted === false && player.isNaturalWinner === false) {
-            console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})`)
             while (dealer.canHit === true) {
 
                 let deltCardDealer = this.#deal()
@@ -98,21 +89,15 @@ export class CardTable {
                 //console.log(dealer.nickname + " hand total value: " + dealer.valueOf())
 
                 if (dealer.isNaturelWinner) {
-                    console.log("Dealer: " + `${dealer.toString()} (${dealer.valueOf()})`)
-                    console.log("21! Dealer Wins!")
-                    break
+                    console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + " Dealer: " + `${dealer.toString()} (${dealer.valueOf()})` + " Dealer Wins! ☹️", '\n')
                 }
                 if (dealer.isBusted) {
-                    console.log("Dealer: " + `${dealer.toString()} (${dealer.valueOf()})`)
-                    console.log("Dealer busted!!!")
-                    console.log("Player wins!")
-                    break
+                    console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + " Dealer: " + `${dealer.toString()} (${dealer.valueOf()})` + " BUSTED! " + player.nickname + " wins! 🎉", '\n')
                 }
             }
-        }
-        if (dealer.isBusted === false && dealer.isNaturalWinner === false && player.isBusted === false && player.isNaturalWinner === false) {
-            console.log("Dealer: " + `${dealer.toString()} (${dealer.valueOf()})`)
-            this.#compareHands(dealer, player)
+            if (dealer.isBusted === false && dealer.isNaturalWinner === false && player.isBusted === false && player.isNaturalWinner === false) {
+                this.#compareHands(dealer, player)
+            }
         }
     }
 
@@ -123,35 +108,23 @@ export class CardTable {
             this.#players.push(player)
         }
         for (let rounds = 1; rounds < numberOfRounds + 1; rounds++) {
-            console.log('\n', `------ Round # ${rounds} ----------`, '\n')
-
+            console.log(`-------- Round # ${rounds} ----------`, '\n')
 
             for (let playerItem of this.#players) {
                 let deltCard = this.#deal()
                 playerItem.addToHand(deltCard, '\n')
-                console.log(playerItem.nickname + ": " + playerItem.toString())
             }
             for (let playerItem of this.#players) {
                 this.#playOut(this.#dealer, playerItem)
-                let arr = this.#dealer.discardHand()
-                if (arr.length > 0) {
-                    this.#discardPile.push(arr)
+                let arrDiscardedDealer = this.#dealer.discardHand()
+                if (arrDiscardedDealer.length > 0) {
+                    this.#discardPile.push(arrDiscardedDealer)
                     this.#discardPile.push(playerItem.discardHand())
 
                 } else {
                     this.#discardPile.push(playerItem.discardHand())
 
                 }
-            }
-        }
-
-        for (let j = 1; j < this.numberOfRounds - 1; j++) {
-            for (let playerItem of this.#players) {
-                console.log("CCCCCCCCCCCCCCCCCC")
-
-                let deltCard = this.#deal()
-                playerItem.addToHand(deltCard, '\n')
-                console.log("177 " + playerItem.nickname + ": " + playerItem.toString())
             }
         }
     }
