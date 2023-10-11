@@ -77,9 +77,9 @@ try {
   //cardTable.assign(startValueObject.numberOfPlayers)
   cardTable.playRounds(startValueObject.numberOfRounds)
   
-  console.log('\n' + 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' + '\n')
+  console.log('\n' + '--------------- GAME OVER ---------------' + '\n')
 
-
+  
   //cardTable.playRounds(startValueObject.numberOfRounds)
     
   // Create a deck, view its 52 playing cards,...

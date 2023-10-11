@@ -31,8 +31,7 @@ export class Player {
     this.#nickname = nickname
     standValue = 14
     this.#standValue = standValue
-    this.#hand = []
-    
+    this.#hand = []    
   }
   
   /**
@@ -42,7 +41,7 @@ export class Player {
   get canHit() {
     
     if (this.#hand.length === 5) {
-      console.log("Five Cards")
+      console.log("Five Cards!!!!")
       return false
     } else if (this.valueOf() < 15) {
       return true
@@ -110,8 +109,8 @@ export class Player {
     let discardedCards = []
     this.#hand.forEach(function (element) {
       discardedCards.push(element)
-    });
-    console.log("Discarded cards: ", discardedCards)
+    })
+//    console.log("Discarded cards: ", discardedCards)
 
     this.#hand = []
 
