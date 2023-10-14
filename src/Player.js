@@ -41,7 +41,7 @@ export class Player {
   get canHit() {
     
     if (this.#hand.length === 5) {
-      console.log("Five Cards!!!!")
+      console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + " Five Cards! " + player.nickname + " wins! 🎉", '\n')
       return false
     } else if (this.valueOf() < 15) {
       return true

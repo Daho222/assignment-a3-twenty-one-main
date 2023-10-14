@@ -37,7 +37,7 @@ export class CardTable {
 
     #deal() {
         while (this.#deck.count > 1) {
-          //  console.log("Deck count " + this.#deck.count, '\n')
+           // console.log("Deck count " + this.#deck.count, '\n')
             const deltCard = this.#deck.deal()
             return deltCard
         }
@@ -58,9 +58,7 @@ export class CardTable {
                 const randomIndex = Math.floor(Math.random() * (i + 1))
                     ;[this.#discardPile[i], this.#discardPile[randomIndex]] = [this.#discardPile[randomIndex], this.#discardPile[i]]
             }
-            console.log("New shuffled pile! Number of Cards in new Deck: " + this.#discardPile.length)
             const deltCardObject = this.#discardPile.pop()
-            console.log("Delt card: " + deltCardObject, '\n')
             const deltCard = deltCardObject
 
             return deltCard
@@ -73,30 +71,31 @@ export class CardTable {
             let deltCard = this.#deal()
             player.addToHand(deltCard, '\n')
 
-            if (player.isNaturalWinner) {
-                console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + player.nickname + " wins! 🎉", '\n')
-            }
-            if (player.isBusted) {
-                console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + " BUSTED! " + "Dealer wins! ☹️", '\n')
-            }
+            
         }
+        if (player.isNaturalWinner) {
+            console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + player.nickname + " wins! 🎉", '\n')
+        }
+        if (player.isBusted) {
+            console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + " BUSTED! " + "Dealer wins! ☹️", '\n')
+        }
+
         if (player.isBusted === false && player.isNaturalWinner === false) {
             while (dealer.canHit === true) {
 
                 let deltCardDealer = this.#deal()
                 dealer.addToHand(deltCardDealer, '\n')
-               // console.log("Dealer: " + dealer.toString())
-                //console.log(dealer.nickname + " hand total value: " + dealer.valueOf())
-
-                if (dealer.isNaturelWinner) {
-                    console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + " Dealer: " + `${dealer.toString()} (${dealer.valueOf()})` + " Dealer Wins! ☹️", '\n')
-                }
-                if (dealer.isBusted) {
-                    console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + " Dealer: " + `${dealer.toString()} (${dealer.valueOf()})` + " BUSTED! " + player.nickname + " wins! 🎉", '\n')
-                }
+            }
+            if (dealer.isNaturelWinner) {
+                console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + " Dealer: " + `${dealer.toString()} (${dealer.valueOf()})` + " Dealer Wins! ☹️", '\n')
+            }
+            if (dealer.isBusted) {
+                console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + " Dealer: " + `${dealer.toString()} (${dealer.valueOf()})` + " BUSTED! " + player.nickname + " wins! 🎉", '\n')
+                return
             }
             if (dealer.isBusted === false && dealer.isNaturalWinner === false && player.isBusted === false && player.isNaturalWinner === false) {
                 this.#compareHands(dealer, player)
+                
             }
         }
     }
@@ -109,10 +108,11 @@ export class CardTable {
         }
         for (let rounds = 1; rounds < numberOfRounds + 1; rounds++) {
             console.log(`-------- Round # ${rounds} ----------`, '\n')
-
+          //  console.log("The Deck: " + this.#deck.toString())
             for (let playerItem of this.#players) {
                 let deltCard = this.#deal()
                 playerItem.addToHand(deltCard, '\n')
+               // console.log(playerItem.nickname + " " + playerItem.toString())
             }
             for (let playerItem of this.#players) {
                 this.#playOut(this.#dealer, playerItem)
@@ -120,7 +120,6 @@ export class CardTable {
                 if (arrDiscardedDealer.length > 0) {
                     this.#discardPile.push(arrDiscardedDealer)
                     this.#discardPile.push(playerItem.discardHand())
-
                 } else {
                     this.#discardPile.push(playerItem.discardHand())
 
