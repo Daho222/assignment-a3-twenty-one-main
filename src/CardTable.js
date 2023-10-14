@@ -85,26 +85,28 @@ export class CardTable {
     while (player.canHit === true) {
       const deltCard = this.#deal()
       player.addToHand(deltCard, '\n')
-    }
-    if (player.isNaturalWinner) {
-      console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + player.nickname + ' wins! 🎉', '\n')
-    }
-    if (player.isBusted) {
-      console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + ' BUSTED! ' + 'Dealer wins! ☹️', '\n')
-    }
 
+      if (player.isNaturalWinner) {
+        console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + player.nickname + ' wins! 🎉', '\n')
+      } else if (player.isBusted) {
+        console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + ' BUSTED! ' + 'Dealer wins! ☹️', '\n')
+      
+      }
+  
+    }
+    
     if (player.isBusted === false && player.isNaturalWinner === false) {
       while (dealer.canHit === true) {
         const deltCardDealer = this.#deal()
         dealer.addToHand(deltCardDealer, '\n')
-      }
-      if (dealer.isNaturelWinner) {
-        console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + ' Dealer: ' + `${dealer.toString()} (${dealer.valueOf()})` + ' Dealer Wins! ☹️', '\n')
-      }
-      if (dealer.isBusted) {
-        console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + ' Dealer: ' + `${dealer.toString()} (${dealer.valueOf()})` + ' BUSTED! ' + player.nickname + ' wins! 🎉', '\n')
-        return
-      }
+
+        if (dealer.isNaturalWinner) {
+            console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + ' Dealer: ' + `${dealer.toString()} (${dealer.valueOf()})` + ' Dealer Wins! ☹️', '\n')
+          } else if (dealer.isBusted) {
+            console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + ' Dealer: ' + `${dealer.toString()} (${dealer.valueOf()})` + ' BUSTED! ' + player.nickname + ' wins! 🎉', '\n')
+          }
+      }  
+      
       if (dealer.isBusted === false && dealer.isNaturalWinner === false && player.isBusted === false && player.isNaturalWinner === false) {
         this.#compareHands(dealer, player)
       }
@@ -126,7 +128,7 @@ export class CardTable {
       for (const playerItem of this.#players) {
         const deltCard = this.#deal()
         playerItem.addToHand(deltCard, '\n')
-        // console.log(playerItem.nickname + " " + playerItem.toString())
+        console.log(playerItem.nickname + " " + playerItem.toString())
       }
       for (const playerItem of this.#players) {
         this.#playOut(this.#dealer, playerItem)
