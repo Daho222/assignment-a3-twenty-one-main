@@ -108,7 +108,7 @@ export class CardTable {
         }
         for (let rounds = 1; rounds < numberOfRounds + 1; rounds++) {
             console.log(`-------- Round # ${rounds} ----------`, '\n')
-          //  console.log("The Deck: " + this.#deck.toString())
+            console.log("The Deck: " + this.#deck.toString())
             for (let playerItem of this.#players) {
                 let deltCard = this.#deal()
                 playerItem.addToHand(deltCard, '\n')
