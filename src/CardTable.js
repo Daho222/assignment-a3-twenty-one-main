@@ -124,11 +124,11 @@ export class CardTable {
     }
     for (let rounds = 1; rounds < numberOfRounds + 1; rounds++) {
       console.log(`-------- Round # ${rounds} ----------`, '\n')
-      console.log('The Deck: ' + this.#deck.toString())
+      console.log('The Deck: ' + this.#deck.toString(), '\n')
       for (const playerItem of this.#players) {
         const deltCard = this.#deal()
         playerItem.addToHand(deltCard, '\n')
-        console.log(playerItem.nickname + " " + playerItem.toString())
+       // console.log(playerItem.nickname + " " + playerItem.toString())
       }
       for (const playerItem of this.#players) {
         this.#playOut(this.#dealer, playerItem)

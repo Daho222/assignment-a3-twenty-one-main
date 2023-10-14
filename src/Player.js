@@ -32,7 +32,6 @@ export class Player {
    *
    */
   get canHit () {
-    console.log(this.#nickname, "Canhit ", this.valueOf())
     if (this.#hand.length === 5 && this.valueOf() < 22) {
       console.log(this.nickname + `: ${this.toString()} (${this.valueOf()}) ` + ' Five Cards! ' + this.nickname + ' wins! 🎉', '\n')
       return false
