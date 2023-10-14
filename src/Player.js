@@ -8,54 +8,46 @@
 import { PlayingCard } from './PlayingCard.js'
 
 /**
- * Represents a deck.
+ * Represents a player.
  */
 export class Player {
   /**
-   * Players.
+   * Creates a new Player object.
    *
-   * @type {Players}
+   * @param {string} nickname - The players name.
+   * @param {number} standValue - The players stand value.
    */
   #hand
   #nickname
   #standValue
 
-  /**
-   * Initializes a new instance of the Player class.
-   *
-   * @param nickname
-   * @param standValue
-   * @param hand
-   */
-  constructor(nickname, standValue) {
+  constructor (nickname, standValue) {
     this.#nickname = nickname
-    standValue = 14
     this.#standValue = standValue
-    this.#hand = []    
+    this.#hand = []
   }
-  
+
   /**
    * Returns canHit.
    *
    */
-  get canHit() {
-    
+  get canHit () {
     if (this.#hand.length === 5) {
-      console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + " Five Cards! " + player.nickname + " wins! 🎉", '\n')
+      // console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + ' Five Cards! ' + player.nickname + ' wins! 🎉', '\n')
       return false
-    } else if (this.valueOf() < 15) {
+    } else if (this.valueOf() < this.#standValue) {
       return true
     } else {
       return false
     }
   }
-  //}
+  // }
 
   /**
    * Returns isBusted.
    *
    */
-  get isBusted() {
+  get isBusted () {
     if (this.valueOf() > 21) {
       return true
     } else {
@@ -67,7 +59,7 @@ export class Player {
    * Returns isNaturalWinner.
    *
    */
-  get isNaturalWinner() {
+  get isNaturalWinner () {
     if (this.valueOf() === 21) {
       return true
     } else {
@@ -79,7 +71,7 @@ export class Player {
    * Returns nickname.
    *
    */
-  get nickname() {
+  get nickname () {
     return this.#nickname
   }
 
@@ -88,7 +80,7 @@ export class Player {
    *
    * @param playingCard
    */
-  addToHand(playingCard) {
+  addToHand (playingCard) {
     if (playingCard.valueOf() === 1) {
       if (this.#hand.valueOf() > 7) {
         this.#hand.push(playingCard)
@@ -105,12 +97,12 @@ export class Player {
    * Discards hand.
    *
    */
-  discardHand() {
-    let discardedCards = []
+  discardHand () {
+    const discardedCards = []
     this.#hand.forEach(function (element) {
       discardedCards.push(element)
     })
-//    console.log("Discarded cards: ", discardedCards)
+    //    console.log("Discarded cards: ", discardedCards)
 
     this.#hand = []
 
@@ -122,7 +114,7 @@ export class Player {
    *
    * @returns {string} A string that represents the current object.
    */
-  toString() {
+  toString () {
     return this.#hand.join(' ')
   }
 
@@ -131,11 +123,10 @@ export class Player {
    *
    * @returns {number} The primitive value of the specified object.
    */
-  valueOf() {
-
-    let value = this.#hand.reduce(function (a, b) {
-      return a + b;
-    }, 0);
+  valueOf () {
+    const value = this.#hand.reduce(function (a, b) {
+      return a + b
+    }, 0)
     return value
   }
 }
