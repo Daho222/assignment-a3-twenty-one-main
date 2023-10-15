@@ -81,7 +81,8 @@ export class Player {
    * @param playingCard
    */
   addToHand (playingCard) {
-    if (playingCard.valueOf() === 1) {
+    this.#hand.push(playingCard)
+    /**if (playingCard.valueOf() === 1) {
       if (this.#hand.valueOf() > 7) {
         this.#hand.push(playingCard)
       } else {
@@ -90,7 +91,7 @@ export class Player {
       }
     } else {
       this.#hand.push(playingCard)
-    }
+    }*/
   }
 
   /**

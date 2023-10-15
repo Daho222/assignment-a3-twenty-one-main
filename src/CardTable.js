@@ -27,7 +27,7 @@ export class CardTable {
     this.#deck.shuffle()
     this.#discardPile = []
     this.#players = []
-    this.#dealer = new Player('Dealer', 14)
+    this.#dealer = new Player('Dealer', 15)
     this.numberOfPlayers = numberOfPlayers
   }
 
@@ -37,6 +37,7 @@ export class CardTable {
    * @param player
    */
   #compareHands (dealer, player) {
+
     if (dealer.valueOf() < player.valueOf()) {
       console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + 'Dealer: ' + `${dealer.toString()} (${dealer.valueOf()}) ` + player.nickname + ' wins! 🎉', '\n')
     } else {
@@ -83,17 +84,33 @@ export class CardTable {
    */
   #playOut (dealer, player) {
     while (player.canHit === true) {
-      const deltCard = this.#deal()
-      player.addToHand(deltCard, '\n')
+      let deltCard = this.#deal()
+      //player.addToHand(deltCard, '\n')
+      console.log("89 ", (player.valueOf() + 100))
+      console.log("90 ", player.valueOf()) 
+     console.log("87 ", player.valueOf(), deltCard.valueOf())
+      if (deltCard.valueOf() === 1 && (player.valueOf() + 14) < 22 && player.valueOf() < 4) {
+          deltCard = new PlayingCard(14, deltCard.suit)
+          console.log("92 ", deltCard)
+          player.addToHand(deltCard, '\n')
 
+        } else {
+          player.addToHand(deltCard, '\n')
+        }
       if (player.isNaturalWinner) {
         console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + player.nickname + ' wins! 🎉', '\n')
       } else if (player.isBusted) {
         console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + ' BUSTED! ' + 'Dealer wins! ☹️', '\n')
-      
       }
   
+      //console.log("96 ", player.valueOf())
+     /** if (player.isNaturalWinner) {
+        console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + player.nickname + ' wins! 🎉', '\n')
+      } else if (player.isBusted) {
+        console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + ' BUSTED! ' + 'Dealer wins! ☹️', '\n')
+      } */
     }
+
     
     if (player.isBusted === false && player.isNaturalWinner === false) {
       while (dealer.canHit === true) {
@@ -119,7 +136,7 @@ export class CardTable {
    */
   playRounds (numberOfRounds) {
     for (let i = 1; i < this.numberOfPlayers; i++) {
-      const player = new Player(('Player#' + i), 14)
+      const player = new Player(('Player#' + i), 15)
       this.#players.push(player)
     }
     for (let rounds = 1; rounds < numberOfRounds + 1; rounds++) {
@@ -128,7 +145,7 @@ export class CardTable {
       for (const playerItem of this.#players) {
         const deltCard = this.#deal()
         playerItem.addToHand(deltCard, '\n')
-       // console.log(playerItem.nickname + " " + playerItem.toString())
+        console.log(playerItem.nickname + " " + playerItem.toString())
       }
       for (const playerItem of this.#players) {
         this.#playOut(this.#dealer, playerItem)
