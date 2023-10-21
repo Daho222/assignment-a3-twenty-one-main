@@ -32,6 +32,25 @@ export class Player {
    *
    */
   get canHit () {
+    
+    if(rankArray.includes(1) && this.valueOf() < 9) {
+      let position = rankArray.indexOf(1)
+      console.log("42 ", position)
+      rankArray[position] = 14 
+    }
+    console.log("44 ", rankArray)
+    if(rankArray.length > 1) {
+      const value = this.rankArray.reduce(function (a, b) {
+        
+        return a + b
+      }, 0)
+      if (value > 18) {
+        return false
+      }
+    }
+       
+
+
     if (this.#hand.length === 5 && this.valueOf() < 22) {
       console.log(this.nickname + `: ${this.toString()} (${this.valueOf()}) ` + ' Five Cards! ' + this.nickname + ' wins! 🎉', '\n')
       return false
@@ -115,6 +134,19 @@ export class Player {
    *
    * @returns {string} A string that represents the current object.
    */
+/**  toString () {
+    // If Ace, Jack, Queen, or King use the first character; otherwise the rank.
+    let rankText
+    switch (this.#hand) {
+      case 14:
+        rankText = 'A'
+        break
+    }
+
+    return rankText + this.suit
+  }
+  */
+ 
   toString () {
     return this.#hand.join(' ')
   }
@@ -126,8 +158,10 @@ export class Player {
    */
   valueOf () {
     const value = this.#hand.reduce(function (a, b) {
+      
       return a + b
     }, 0)
+
     return value
   }
 }

@@ -85,19 +85,31 @@ export class CardTable {
   #playOut (dealer, player) {
     while (player.canHit === true) {
       let deltCard = this.#deal()
-      //player.addToHand(deltCard, '\n')
-      console.log("89 ", (player.valueOf() + 100))
-      console.log("90 ", player.valueOf()) 
-     console.log("87 ", player.valueOf(), deltCard.valueOf())
-      if (deltCard.valueOf() === 1 && (player.valueOf() + 14) < 22 && player.valueOf() < 4) {
-          deltCard = new PlayingCard(14, deltCard.suit)
+      player.addToHand(deltCard, '\n')
+      
+      /**console.log("87 ", player.valueOf(), deltCard.valueOf())
+      
+      if(deltCard.valueOf() === 1 && (player.valueOf() + 13) > 21) {
+        player.addToHand(deltCard, '\n')
+
+      } else if (deltCard.valueOf() === 1 && (player.valueOf() + 13) < 22) {
+        player.addToHand(deltCard, '\n') 
+
+
+      }
+
+    /**   if (deltCard.valueOf() === 1 && (player.valueOf() + 14) < 22 && player.valueOf() > 4) {
+          let aceHigh = .valueOf() + 13
+          console.log("91", deltCard.valueOf(), aceHigh) 
+        //deltCard = new PlayingCard(14, deltCard.suit)
           console.log("92 ", deltCard)
           player.addToHand(deltCard, '\n')
 
         } else {
           player.addToHand(deltCard, '\n')
         }
-      if (player.isNaturalWinner) {
+      */
+        if (player.isNaturalWinner) {
         console.log(player.nickname + `: ${player.toString()} (${player.valueOf()}) ` + player.nickname + ' wins! 🎉', '\n')
       } else if (player.isBusted) {
         console.log(player.nickname + `: ${player.toString()} (${player.valueOf()})` + ' BUSTED! ' + 'Dealer wins! ☹️', '\n')
